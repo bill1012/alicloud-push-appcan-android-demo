@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uexplugins>
+
+    <plugin
+        className="com.aliclound.push.UexAlicloudPush"
+        uexName="uexAlicloudPush" >
+        <method name="getDeviceId" />
+        <method name="bindAccount" />
+        <method name="bindAccountDialog" />
+        <method name="unbindAccount" />
+        <method name="addTag" />
+        <method name="addTagDialog" />
+        <method name="removeTag" />
+        <method name="removeTagDialog" />
+    </plugin>
+
+</uexplugins>

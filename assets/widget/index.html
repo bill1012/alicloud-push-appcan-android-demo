@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+
+<script type="text/javascript">
+	//callback function
+	function onGetDeviceId(opCode, dataType, data) {
+		if (opCode == 0)
+			document.getElementById('f1').innerHTML = data;
+	}
+
+	function onBindAccount(opCode, dataType, data) {
+		if (opCode == 0)
+			alert("绑定了账户：" + data);
+	}
+
+	function onUnbindAccount(opCode, dataType, data) {
+		if (opCode == 0)
+			alert("解绑了账户");
+	}
+
+	function onAddTag(opCode, dataType, data) {
+		if (opCode == 0)
+			alert("新增了标签：" + data);
+		else if(opCode==1)
+			alert("新增标签失败，原因:"+data);
+	}
+
+	function onRemoveTag(opCode, dataType, data) {
+		if (opCode == 0)
+			alert("删除了标签：" + data);
+		else if(opCode==1)
+			alert("删除标签失败，原因:"+data);
+	}
+   
+	window.uexOnload = function(type) {
+		if (type == 0) {
+			uexAlicloudPush.onGetDeviceId = onGetDeviceId;
+			uexAlicloudPush.onBindAccount = onBindAccount;
+			uexAlicloudPush.onUnbindAccount = onUnbindAccount;
+			uexAlicloudPush.onAddTag = onAddTag;
+			uexAlicloudPush.onRemoveTag = onRemoveTag;
+		}
+	}
+
+	function bindAccount() {
+		var value = document.getElementById("txt_b_account").value;
+		uexAlicloudPush.bindAccount(value);
+	}
+
+	function addTag() {
+		var value = document.getElementById("txt_a_tag").value;
+		uexAlicloudPush.addTag(value);
+	}
+
+	function removeTag() {
+		var value = document.getElementById("txt_r_tag").value;
+		uexAlicloudPush.removeTag(value);
+	}
+</script>
+</head>
+
+<body>
+	<div class="tit">uexAlicloudPush对象</div>
+	<div class="conbor">
+		<div class="consj">
+
+			<span>1.getDeviceId接口</span>
+			<div class="tcxx" id="f1">获取deviceId</div>
+			<input class="btn" type="button" value="获取deviceId" onclick="uexAlicloudPush.getDeviceId();"><br> 
+				
+		    <span>2-1.bindAccount接口</span>
+			<input id="txt_b_account" value="account_test" style="width: 90%" />
+			<input class="btn" type="button" value="绑定账户" onclick="bindAccount()"><br>
+
+			<span>2-2.bindAccountDialog接口</span> 
+			<input class="btn" type="button" value="绑定账户-弹窗" onclick="uexAlicloudPush.bindAccountDialog('请输入要绑定的账号');"><br>
+
+			<span>3.unbindAccount接口</span> 
+			<input class="btn" type="button" value="解绑账户" onclick="uexAlicloudPush.unbindAccount();"><br>
+
+			<span>4-1.addTag接口</span> 
+			<input id="txt_a_tag" value="account_test"	style="width: 90%" />
+			 <input class="btn" type="button" value="添加标签"	onclick="addTag()"><br>
+				
+			 <span>4-2.addTagDialog接口</span>
+			<input class="btn" type="button" value="添加标签-弹窗"	onclick="uexAlicloudPush.addTagDialog('请输入要添加的标签');"><br>
+
+			<span>5-1.removeTag接口</span>
+			 <input id="txt_r_tag"	value="account_test" style="width: 90%" /> 
+			 <input class="btn"	type="button" value="删除标签" onclick="removeTag()"><br> 
+			 
+			 <span>5-2.removeTagDialog接口</span>
+			<input class="btn" type="button" value="删除标签-弹窗"	onclick="uexAlicloudPush.removeTagDialog('请输入要删除的标签');"><br>
+
+		</div>
+	</div>
+</body>
+</html>
